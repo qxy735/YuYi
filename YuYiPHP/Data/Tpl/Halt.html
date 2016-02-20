@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>网站出错了</title>
+    <style>
+        .version{
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            left: 0px;
+            background-color: #EEEEEE;
+        }
+        .version p{
+            height: 20px;
+            line-height: 20px;
+            padding: 0px 20px;
+        }
+        .version p span{
+            padding: 0px 10px;
+            color: gray;
+            font-size: 10px;
+        }
+        .debug_false{
+            height: 200px;
+            line-height: 200px;
+            font-size: 20px;
+            text-align: center;
+            color:gray;
+        }
+        .info{
+            padding-left: 20px;
+            position: absolute;
+            top: 40px;
+            left: 0px;
+        }
+        .info h2{
+            color: gray;
+        }
+        .header{
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: #EEEEEE;
+        }
+        .header p{
+            height: 20px;
+            line-height: 20px;
+            padding: 0px 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="halt">
+    <div class="header">
+        <p>禹译框架错误提示:</p>
+    </div>
+    <div class="info">
+        <?php if(APP_DEBUG){?>
+            <div class="debug_true">
+                <h4><?php echo $error['message'];?></h4>
+                <h4>错误位置:</h4>
+                <p><?php echo $error['file'];?> Line: <?php echo $error['line'];?></p>
+                <?php if(isset($error['trace'])){?>
+                    <h4>Trace:</h4>
+                    <p><?php echo nl2br($error['trace']);?></p>
+                <?php }?>
+            </div>
+        <?php }else{?>
+            <p class="debug_false"><?php echo $error['message'];?></p>
+        <?php }?>
+    </div>
+    <div class="version">
+        <p>YuYiPHP框架<span>(<?php echo YUYI_VERSION;?>)[禹译框架 轻量开发]</span></p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>操作成功</title>
+    <style>
+        .success{
+            font-size: 12px;
+            width: 400px;
+            height: 150px;
+            border: 1px solid #ddd;
+            padding: 0px;
+            position: absolute;
+            top: 0px;
+        }
+        .success h4{
+            margin: 0px;
+            height: 25px;
+            line-height: 25px;
+            background: orange;
+            border-bottom: 1px solid #eee;
+            color: #ffffff;
+            padding: 0px 10px;
+        }
+        .success div{
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="success" id="success">
+        <h4>操作成功</h4>
+        <div>
+            <?php echo $message;?>
+            <span id="time"><?php echo $time;?></span>
+            秒后自动跳转到指定页面
+            <?php if($url){?><a href="<?php echo $url;?>">点击跳转</a><?php }?>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var success = document.getElementById('success');
+    var clientWidth = document.body.clientWidth;
+    var successWidth = Math.floor((clientWidth - 400) / 2);
+    var time = document.getElementById('time');
+    success.style.left = (successWidth >= 0 ? successWidth : 0) + 'px';
+    var num = 3;
+    setTimeout(function(){
+        success.style.top = num * 5 + 'px';
+    }, 300);
+    var url = '<?php echo $url;?>';
+    var sec = '<?php echo $time;?>';
+    var timer = setInterval(function(){
+        sec --;
+        if(sec <= 0){
+            clearInterval(timer);
+            if(url){
+                window.location.href = url;
+            }else{
+                window.history.go(-1);
+            }
+        }
+        time.innerHTML = sec;
+    }, 1000);
+</script>
